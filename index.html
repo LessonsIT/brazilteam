@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção Brasileira - History</title>
+    <style>
+        :root {
+            --yellow: #FEDF00;
+            --green: #009739;
+            --blue: #012169;
+            --white: #FFFFFF;
+            --light-gray: #FAFAFA;
+            --gray: #E0E0E0;
+            --dark-gray: #8E8E8E;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: #262626;
+        }
+        
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            max-width: 935px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--green), var(--yellow), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .search-bar {
+            position: relative;
+            display: none;
+        }
+        
+        .search-bar input {
+            background-color: var(--light-gray);
+            border: 1px solid var(--gray);
+            border-radius: 3px;
+            padding: 5px 10px;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-icons i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        main {
+            max-width: 935px;
+            margin: 80px auto 0;
+            padding: 0 20px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--green);
+            margin-right: 50px;
+        }
+        
+        .profile-info h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-stats span {
+            font-weight: bold;
+        }
+        
+        .profile-bio {
+            max-width: 400px;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 15px 0;
+            margin: 0 30px;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #262626;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .grid-item {
+            aspect-ratio: 1;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .grid-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .grid-item:hover .grid-item-overlay {
+            opacity: 1;
+        }
+        
+        .grid-item-stats {
+            color: white;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .grid-item-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            display: flex;
+        }
+        
+        .modal-image {
+            flex: 1;
+            background-color: var(--light-gray);
+        }
+        
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .modal-info {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .modal-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-user-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .modal-username {
+            font-weight: bold;
+        }
+        
+        .modal-caption {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .modal-comments {
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .modal-comment {
+            margin-bottom: 15px;
+        }
+        
+        .modal-comment-user {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .modal-actions i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .modal-likes {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .modal-date {
+            color: var(--dark-gray);
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .modal-comment-form {
+            display: flex;
+            border-top: 1px solid var(--gray);
+            padding-top: 15px;
+        }
+        
+        .modal-comment-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 5px;
+        }
+        
+        .modal-comment-post {
+            color: var(--blue);
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--white);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .liked {
+            color: red;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-pic {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+            
+            .modal-body {
+                flex-direction: column;
+            }
+            
+            .modal-image {
+                height: 300px;
+            }
+        }
+        
+        /* Timeline specific styles */
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 20px 0 20px 40px;
+            border-left: 2px solid var(--green);
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-date {
+            position: absolute;
+            left: -70px;
+            top: 20px;
+            background-color: var(--green);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .timeline-content {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 10px;
+            color: var(--blue);
+        }
+        
+        .timeline-content img {
+            max-width: 100%;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .timeline-links {
+            margin-top: 10px;
+        }
+        
+        .timeline-links a {
+            color: var(--blue);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .timeline-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Player cards */
+        .players-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .player-card {
+            background-color: var(--white);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .player-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .player-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .player-card:hover .player-image img {
+            transform: scale(1.05);
+        }
+        
+        .player-info {
+            padding: 15px;
+        }
+        
+        .player-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--blue);
+        }
+        
+        .player-position {
+            color: var(--dark-gray);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .player-era {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .player-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--dark-gray);
+        }
+        
+        /* Search results */
+        .search-results {
+            display: none;
+            padding: 20px;
+        }
+        
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--gray);
+            cursor: pointer;
+        }
+        
+        .search-result-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .search-result-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .search-result-text {
+            font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Seleção Brasileira</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search" id="search-input">
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="nav-icons">
+                <i class="fas fa-home" id="home-btn"></i>
+                <i class="fas fa-search" id="search-btn"></i>
+                <i class="fas fa-calendar-alt" id="timeline-btn"></i>
+                <i class="fas fa-users" id="players-btn"></i>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Profile Section -->
+        <section id="profile-section">
+            <div class="profile-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="Brazil Flag" class="profile-pic">
+                <div class="profile-info">
+                    <h1>Brazil National Football Team</h1>
+                    <div class="profile-stats">
+                        <div><span>5</span> World Cups</div>
+                        <div><span>9</span> Copa América</div>
+                        <div><span>4</span> Confederations Cups</div>
+                    </div>
+                    <div class="profile-bio">
+                        The Brazil national football team represents Brazil in men's international football and is administered by the Brazilian Football Confederation. The team has won a record five FIFA World Cup titles.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="gallery"><i class="fas fa-th"></i> Gallery</div>
+                <div class="tab" data-tab="timeline"><i class="fas fa-calendar-alt"></i> Timeline</div>
+                <div class="tab" data-tab="players"><i class="fas fa-users"></i> Legends</div>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="grid" id="gallery-grid">
+                <!-- Items will be added dynamically with jQuery -->
+            </div>
+            
+            <!-- Timeline Section (hidden by default) -->
+            <div id="timeline-section" style="display: none;">
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1914</div>
+                        <div class="timeline-content">
+                            <h3>First International Match</h3>
+                            <p>Brazil played its first official international match against Exeter City, winning 2-0. The match took place at Estádio das Laranjeiras in Rio de Janeiro.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Brazil_national_1914.jpg" alt="Brazil team 1914">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Brazil_national_football_team" target="_blank">Read more on Wikipedia</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">1930</div>
+                        <div class="timeline-content">
+                            <h3>First World Cup Participation</h3>
+                            <p>Brazil participated in the inaugural FIFA World Cup held in Uruguay. They were eliminated in the first round after winning one match and losing another.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Brazil_national_football_team%2C_FIFA_World_Cup_1930.gif/640px-Brazil_national_football_team%2C_FIFA_World_Cup_1930.gif" alt="Brazil team 1930">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/1930_FIFA_World_Cup" target="_blank">About 1930 World Cup</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">1950</div>
+                        <div class="timeline-content">
+                            <h3>Maracanazo - The Heartbreak</h3>
+                            <p>Brazil hosted the World Cup and reached the final, only to lose 2-1 to Uruguay in the famous "Maracanazo" match at Maracanã Stadium. This defeat is considered one of the biggest upsets in football history.</p>
+                            <img src="https://i0.wp.com/thesefootballtimes.co/wp-content/uploads/2015/07/ap50071616481401897662-767.jpg?fit=1484%2C908&ssl=1" alt="Uruguay's winning goal">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Uruguay_v_Brazil_(1950_FIFA_World_Cup)" target="_blank">Match details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">1958</div>
+                        <div class="timeline-content">
+                            <h3>First World Cup Victory</h3>
+                            <p>Brazil won its first World Cup in Sweden, introducing the world to 17-year-old Pelé. The team defeated the hosts 5-2 in the final with goals from Vavá (2), Pelé (2), and Zagallo.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Brasil_-_1958.jpg/640px-Brasil_-_1958.jpg" alt="Brazil 1958 World Cup winners">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/1958_FIFA_World_Cup" target="_blank">1958 World Cup</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">1962</div>
+                        <div class="timeline-content">
+                            <h3>Back-to-Back Titles</h3>
+                            <p>Brazil successfully defended their title in Chile despite Pelé being injured early in the tournament. Garrincha emerged as the star player, leading Brazil to victory.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Sele%C3%A7%C3%A3o_Brasileira_de_Futebol_na_Copa_do_Mundo_de_1962.tiff/lossy-page1-640px-Sele%C3%A7%C3%A3o_Brasileira_de_Futebol_na_Copa_do_Mundo_de_1962.tiff.jpg" alt="Brazil 1962 World Cup winners">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/1962_FIFA_World_Cup" target="_blank">1962 World Cup</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">1970</div>
+                        <div class="timeline-content">
+                            <h3>The Greatest Team Ever</h3>
+                            <p>Brazil won their third World Cup in Mexico with what is widely regarded as the greatest team in football history. Featuring Pelé, Jairzinho, Rivelino, Tostão, and Carlos Alberto, the team played beautiful, attacking football.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Brazil_national_team_1970.jpg/640px-Brazil_national_team_1970.jpg" alt="Brazil 1970 World Cup winners">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/1970_FIFA_World_Cup" target="_blank">1970 World Cup</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">1994</div>
+                        <div class="timeline-content">
+                            <h3>Ending the Drought</h3>
+                            <p>After 24 years without a World Cup title, Brazil won their fourth championship in the USA. The team, led by Romário and Bebeto, defeated Italy in the first penalty shootout in a World Cup final.</p>
+                            <img src="https://cdn.mos.cms.futurecdn.net/Hgv7sEiSEgk5stsaC5yvTd.jpg" alt="Brazil 1994 World Cup winners">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/1994_FIFA_World_Cup" target="_blank">1994 World Cup</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2002</div>
+                        <div class="timeline-content">
+                            <h3>Pentacampeões</h3>
+                            <p>Brazil won their fifth World Cup title in Japan/South Korea with the "Three R's" attack of Ronaldo, Rivaldo, and Ronaldinho. Ronaldo scored both goals in the 2-0 final victory over Germany.</p>
+                            <img src="https://avatars.mds.yandex.net/i?id=e68ea1450cf638ed89d15c715faebd3aaed6a6af-4146377-images-thumbs&n=13" alt="Brazil 2002 World Cup winners">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/2002_FIFA_World_Cup" target="_blank">2002 World Cup</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2014</div>
+                        <div class="timeline-content">
+                            <h3>Mineirazo - Home Soil Humiliation</h3>
+                            <p>Hosting the World Cup for the second time, Brazil suffered their worst ever defeat - a 7-1 loss to Germany in the semifinals at Mineirão Stadium. The match became known as the "Mineirazo".</p>
+                            <img src="https://img.championat.com/ranker/16688043672083003092.jpg" alt="Germany vs Brazil 7-1">
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Germany_v_Brazil_(2014_FIFA_World_Cup)" target="_blank">Match details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Players Section (hidden by default) -->
+            <div id="players-section" style="display: none;">
+                <div class="players-container">
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Pele_con_brasil_%28cropped%29.jpg" alt="Pelé">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Pelé</h3>
+                            <div class="player-position">Forward</div>
+                            <div class="player-era">1957-1971</div>
+                            <div class="player-stats">
+                                <span>92 caps</span>
+                                <span>77 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Pel%C3%A9" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/MFdSantos-Garrincha.jpg/640px-MFdSantos-Garrincha.jpg" alt="Garrincha">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Garrincha</h3>
+                            <div class="player-position">Winger</div>
+                            <div class="player-era">1955-1966</div>
+                            <div class="player-stats">
+                                <span>50 caps</span>
+                                <span>12 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Garrincha" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://avatars.mds.yandex.net/i?id=6e4118c7e7a5bbe944551162a763f9f86190d646-5345276-images-thumbs&n=13" alt="Zico">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Zico</h3>
+                            <div class="player-position">Attacking Midfielder</div>
+                            <div class="player-era">1976-1986</div>
+                            <div class="player-stats">
+                                <span>71 caps</span>
+                                <span>48 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Zico" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://m.media-amazon.com/images/M/MV5BZjk2Y2U1MGItNDJlNC00YjkxLTgxYTktYjVhMmM4MWVkOWJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Romário">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Romário</h3>
+                            <div class="player-position">Striker</div>
+                            <div class="player-era">1987-2005</div>
+                            <div class="player-stats">
+                                <span>70 caps</span>
+                                <span>55 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Rom%C3%A1rio" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://i.ytimg.com/vi/YZEgLlRwi8c/maxresdefault.jpg" alt="Ronaldo">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Ronaldo</h3>
+                            <div class="player-position">Striker</div>
+                            <div class="player-era">1994-2011</div>
+                            <div class="player-stats">
+                                <span>98 caps</span>
+                                <span>62 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Ronaldo_(Brazilian_footballer)" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://distribution.faceit-cdn.net/images/c4a9c850-5d5a-456a-9eb8-f546f696eb8d.jpeg" alt="Ronaldinho">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Ronaldinho</h3>
+                            <div class="player-position">Attacking Midfielder</div>
+                            <div class="player-era">1999-2013</div>
+                            <div class="player-stats">
+                                <span>97 caps</span>
+                                <span>33 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Ronaldinho" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/1a32ab167095047.64240291655a1.jpg" alt="Kaká">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Kaká</h3>
+                            <div class="player-position">Attacking Midfielder</div>
+                            <div class="player-era">2002-2016</div>
+                            <div class="player-stats">
+                                <span>92 caps</span>
+                                <span>29 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Kak%C3%A1" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-image">
+                            <img src="https://i.pinimg.com/originals/d9/ca/ae/d9caaed4a966d24d9713edcb86a15f05.jpg" alt="Neymar">
+                        </div>
+                        <div class="player-info">
+                            <h3 class="player-name">Neymar</h3>
+                            <div class="player-position">Forward</div>
+                            <div class="player-era">2010-Present</div>
+                            <div class="player-stats">
+                                <span>128 caps</span>
+                                <span>79 goals</span>
+                            </div>
+                            <div class="timeline-links">
+                                <a href="https://en.wikipedia.org/wiki/Neymar" target="_blank">Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Modal for image/details -->
+    <div class="modal" id="image-modal">
+        <button class="close-modal">&times;</button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-user">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="Brazil Flag" class="modal-user-pic">
+                    <span class="modal-username">Seleção Brasileira</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="" alt="" id="modal-image">
+                </div>
+                <div class="modal-info">
+                    <div class="modal-caption" id="modal-caption"></div>
+                    <div class="modal-comments">
+                        <div class="modal-comment">
+                            <span class="modal-comment-user">fifaofficial</span>
+                            <span>One of the greatest teams in football history!</span>
+                        </div>
+                        <div class="modal-comment">
+                            <span class="modal-comment-user">footballfan</span>
+                            <span>Joga bonito at its finest!</span>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <i class="far fa-heart" id="modal-like"></i>
+                        <i class="far fa-comment"></i>
+                        <i class="far fa-share-square"></i>
+                    </div>
+                    <div class="modal-likes" id="modal-likes">1,234 likes</div>
+                    <div class="modal-date">June 29, 1970</div>
+                    <form class="modal-comment-form">
+                        <input type="text" placeholder="Add a comment..." class="modal-comment-input">
+                        <button type="submit" class="modal-comment-post">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Gallery data
+            const galleryItems = [
+                {
+                    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Brasil_-_1958.jpg/640px-Brasil_-_1958.jpg",
+                    caption: "Brazil's first World Cup winning team in 1958 featuring the 17-year-old Pelé.",
+                    likes: 1250
+                },
+                {
+                    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Sele%C3%A7%C3%A3o_Brasileira_de_Futebol_na_Copa_do_Mundo_de_1962.tiff/lossy-page1-640px-Sele%C3%A7%C3%A3o_Brasileira_de_Futebol_na_Copa_do_Mundo_de_1962.tiff.jpg",
+                    caption: "The 1962 World Cup winning team with Garrincha as the star player after Pelé's injury.",
+                    likes: 980
+                },
+                {
+                    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Brazil_national_team_1970.jpg/640px-Brazil_national_team_1970.jpg",
+                    caption: "The legendary 1970 team considered by many as the greatest football team ever assembled.",
+                    likes: 2100
+                },
+                {
+                    image: "https://cdn.mos.cms.futurecdn.net/Hgv7sEiSEgk5stsaC5yvTd.jpg",
+                    caption: "Brazil's 1994 World Cup winning team led by Romário and Bebeto.",
+                    likes: 1500
+                },
+                {
+                    image: "https://avatars.mds.yandex.net/i?id=e68ea1450cf638ed89d15c715faebd3aaed6a6af-4146377-images-thumbs&n=13",
+                    caption: "The 2002 World Cup champions featuring the Three R's: Ronaldo, Rivaldo and Ronaldinho.",
+                    likes: 1800
+                },
+                {
+                    image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Pele_con_brasil_%28cropped%29.jpg",
+                    caption: "Pelé, the king of football and Brazil's all-time leading scorer with 77 goals.",
+                    likes: 2500
+                },
+                {
+                    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/MFdSantos-Garrincha.jpg/640px-MFdSantos-Garrincha.jpg",
+                    caption: "Garrincha, the angel with bent legs who led Brazil to 1962 World Cup victory.",
+                    likes: 1200
+                },
+                {
+                    image: "https://i.ytimg.com/vi/YZEgLlRwi8c/maxresdefault.jpg",
+                    caption: "Ronaldo, the highest World Cup goalscorer with 15 goals across 3 tournaments.",
+                    likes: 1900
+                },
+                {
+                    image: "https://avatars.mds.yandex.net/i?id=6e4118c7e7a5bbe944551162a763f9f86190d646-5345276-images-thumbs&n=13",
+                    caption: "Zico, one of the greatest playmakers in football history.",
+                    likes: 1100
+                }
+            ];
+            
+            // Populate gallery grid
+            galleryItems.forEach((item, index) => {
+                $('#gallery-grid').append(`
+                    <div class="grid-item" data-index="${index}">
+                        <img src="${item.image}" alt="Gallery image">
+                        <div class="grid-item-overlay">
+                            <div class="grid-item-stats">
+                                <div class="grid-item-stat">
+                                    <i class="fas fa-heart"></i> ${item.likes}
+                                </div>
+                                <div class="grid-item-stat">
+                                    <i class="fas fa-comment"></i> 142
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+            
+            // Search functionality
+            $('#search-btn').click(function() {
+                $('.search-bar').toggle();
+                if ($('.search-bar').is(':visible')) {
+                    $('#search-input').focus();
+                }
+            });
+            
+            // Tab switching
+            $('.tab').click(function() {
+                const tab = $(this).data('tab');
+                
+                // Update active tab
+                $('.tab').removeClass('active');
+                $(this).addClass('active');
+                
+                // Show corresponding section
+                $('#gallery-grid, #timeline-section, #players-section').hide();
+                
+                if (tab === 'gallery') {
+                    $('#gallery-grid').show();
+                } else if (tab === 'timeline') {
+                    $('#timeline-section').show();
+                } else if (tab === 'players') {
+                    $('#players-section').show();
+                }
+            });
+            
+            // Nav icon functionality
+            $('#home-btn').click(function() {
+                $('.tab').removeClass('active');
+                $('[data-tab="gallery"]').addClass('active');
+                $('#gallery-grid').show();
+                $('#timeline-section, #players-section').hide();
+            });
+            
+            $('#timeline-btn').click(function() {
+                $('.tab').removeClass('active');
+                $('[data-tab="timeline"]').addClass('active');
+                $('#timeline-section').show();
+                $('#gallery-grid, #players-section').hide();
+            });
+            
+            $('#players-btn').click(function() {
+                $('.tab').removeClass('active');
+                $('[data-tab="players"]').addClass('active');
+                $('#players-section').show();
+                $('#gallery-grid, #timeline-section').hide();
+            });
+            
+            // Modal functionality
+            $('.grid').on('click', '.grid-item', function() {
+                const index = $(this).data('index');
+                const item = galleryItems[index];
+                
+                $('#modal-image').attr('src', item.image);
+                $('#modal-caption').text(item.caption);
+                $('#modal-likes').text(item.likes.toLocaleString() + ' likes');
+                
+                $('#image-modal').fadeIn();
+            });
+            
+            $('.close-modal').click(function() {
+                $('#image-modal').fadeOut();
+            });
+            
+            // Like functionality
+            $('#modal-like').click(function() {
+                $(this).toggleClass('far fas liked');
+            });
+            
+            // Search functionality
+            $('#search-input').on('input', function() {
+                const query = $(this).val().toLowerCase();
+                const $results = $('#search-results');
+                
+                $results.empty();
+                
+                if (query.length > 0) {
+                    $results.show();
+                    
+                    // Search players
+                    const players = [
+                        { name: "Pelé", image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Pele_con_brasil_%28cropped%29.jpg" },
+                        { name: "Garrincha", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/MFdSantos-Garrincha.jpg/640px-MFdSantos-Garrincha.jpg" },
+                        { name: "Zico", image: "https://avatars.mds.yandex.net/i?id=6e4118c7e7a5bbe944551162a763f9f86190d646-5345276-images-thumbs&n=13" },
+                        { name: "Romário", image: "https://m.media-amazon.com/images/M/MV5BZjk2Y2U1MGItNDJlNC00YjkxLTgxYTktYjVhMmM4MWVkOWJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
+                        { name: "Ronaldo", image: "https://i.ytimg.com/vi/YZEgLlRwi8c/maxresdefault.jpg" },
+                        { name: "Ronaldinho", image: "https://distribution.faceit-cdn.net/images/c4a9c850-5d5a-456a-9eb8-f546f696eb8d.jpeg" },
+                        { name: "Neymar", image: "https://i.pinimg.com/originals/d9/ca/ae/d9caaed4a966d24d9713edcb86a15f05.jpg" }
+                    ];
+                    
+                    // Search tournaments
+                    const tournaments = [
+                        { name: "1958 World Cup", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Brasil_-_1958.jpg/640px-Brasil_-_1958.jpg" },
+                        { name: "1962 World Cup", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Sele%C3%A7%C3%A3o_Brasileira_de_Futebol_na_Copa_do_Mundo_de_1962.tiff/lossy-page1-640px-Sele%C3%A7%C3%A3o_Brasileira_de_Futebol_na_Copa_do_Mundo_de_1962.tiff.jpg" },
+                        { name: "1970 World Cup", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Brazil_national_team_1970.jpg/640px-Brazil_national_team_1970.jpg" },
+                        { name: "1994 World Cup", image: "https://cdn.mos.cms.futurecdn.net/Hgv7sEiSEgk5stsaC5yvTd.jpg" },
+                        { name: "2002 World Cup", image: "https://avatars.mds.yandex.net/i?id=e68ea1450cf638ed89d15c715faebd3aaed6a6af-4146377-images-thumbs&n=13" }
+                    ];
+                    
+                    // Combine all searchable items
+                    const allItems = [...players, ...tournaments];
+                    
+                    // Filter based on query
+                    const filteredItems = allItems.filter(item => 
+                        item.name.toLowerCase().includes(query)
+                    );
+                    
+                    // Display results
+                    if (filteredItems.length > 0) {
+                        filteredItems.forEach(item => {
+                            $results.append(`
+                                <div class="search-result-item">
+                                    <img src="${item.image}" alt="${item.name}" class="search-result-image">
+                                    <div class="search-result-text">${item.name}</div>
+                                </div>
+                            `);
+                        });
+                    } else {
+                        $results.append('<div class="search-result-item">No results found</div>');
+                    }
+                } else {
+                    $results.hide();
+                }
+            });
+            
+            // Close search results when clicking outside
+            $(document).click(function(e) {
+                if (!$(e.target).closest('.search-bar').length) {
+                    $('#search-results').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
